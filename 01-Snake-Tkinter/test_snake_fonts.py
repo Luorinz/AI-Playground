@@ -1,7 +1,6 @@
 import unittest
 import tkinter as tk
-from  import SnakeGame
-
+from snake import SnakeGame
 
 class SnakeFontTests(unittest.TestCase):
     def setUp(self):
