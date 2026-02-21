@@ -174,11 +174,25 @@ class SnakeGame:
             self.mode_button_frame.destroy()
             self.mode_button_frame = None
 
+    def _get_canvas_font(self, size: int) -> Optional[str]:
+        """获取 Canvas 使用的字体字符串。
+
+        Args:
+            size: 字体大小
+
+        Returns:
+            字体字符串或 None
+        """
+        if self.ui_font_family:
+            # 字体名称有空格时需要引号
+            return f'"{self.ui_font_family}" {size}'
+        return None
+
     def show_mode_selection(self) -> None:
         """显示模式选择界面。"""
         self.canvas.delete("all")
-        title_font = f"{self.ui_font_family} {FONT_SIZE_TITLE}" if self.ui_font_family else None
-        button_font = f"{self.ui_font_family} {FONT_SIZE_BUTTON}" if self.ui_font_family else None
+        title_font = self._get_canvas_font(FONT_SIZE_TITLE)
+        button_font = self._get_canvas_font(FONT_SIZE_BUTTON)
 
         self.canvas.create_text(
             self.width // 2,
@@ -432,7 +446,7 @@ class SnakeGame:
             fx, fy = self.food
             self.draw_cell(fx, fy, COLOR_FOOD)
         if self.game_over:
-            game_over_font = f"{self.ui_font_family} {FONT_SIZE_GAME_OVER}" if self.ui_font_family else None
+            game_over_font = self._get_canvas_font(FONT_SIZE_GAME_OVER)
             self.canvas.create_text(
                 self.width // 2,
                 self.height // 2,
