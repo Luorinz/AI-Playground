@@ -96,7 +96,6 @@ class SnakeGame:
         self._bind_keys()
 
         self.mode_button_frame: Optional[tk.Frame] = None
-        self.canvas_fonts: list[tkfont.Font] = []  # 保持字体引用防止被垃圾回收
 
         self.show_mode_selection()
 
@@ -154,7 +153,6 @@ class SnakeGame:
         """初始化游戏状态，开始新游戏。"""
         self.canvas.delete("all")
         self._destroy_mode_buttons()
-        self.canvas_fonts.clear()  # 清除字体引用
         self.score = 0
         self.score_var.set(UI_TEXT_SCORE.format(score=0))
         self.direction = DIRECTION_RIGHT
@@ -176,19 +174,18 @@ class SnakeGame:
             self.mode_button_frame.destroy()
             self.mode_button_frame = None
 
-    def _get_canvas_font(self, size: int) -> Optional[tkfont.Font]:
-        """获取 Canvas 使用的字体对象。
+    def _get_canvas_font(self, size: int) -> Optional[str]:
+        """获取 Canvas 使用的字体字符串。
 
         Args:
             size: 字体大小
 
         Returns:
-            Font 对象或 None
+            字体字符串（带引号）或 None
         """
         if self.ui_font_family:
-            font = tkfont.Font(family=self.ui_font_family, size=size)
-            self.canvas_fonts.append(font)  # 保持引用防止被垃圾回收
-            return font
+            # Canvas 需要引号格式："Font Name" size
+            return f'"{self.ui_font_family}" {size}'
         return None
 
     def show_mode_selection(self) -> None:
