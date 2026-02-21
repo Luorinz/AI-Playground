@@ -177,8 +177,8 @@ class SnakeGame:
     def show_mode_selection(self) -> None:
         """显示模式选择界面。"""
         self.canvas.delete("all")
-        title_font = (self.ui_font_family, FONT_SIZE_TITLE) if self.ui_font_family else None
-        button_font = (self.ui_font_family, FONT_SIZE_BUTTON) if self.ui_font_family else None
+        title_font = f"{self.ui_font_family} {FONT_SIZE_TITLE}" if self.ui_font_family else None
+        button_font = f"{self.ui_font_family} {FONT_SIZE_BUTTON}" if self.ui_font_family else None
 
         self.canvas.create_text(
             self.width // 2,
@@ -432,7 +432,7 @@ class SnakeGame:
             fx, fy = self.food
             self.draw_cell(fx, fy, COLOR_FOOD)
         if self.game_over:
-            game_over_font = (self.ui_font_family, FONT_SIZE_GAME_OVER) if self.ui_font_family else None
+            game_over_font = f"{self.ui_font_family} {FONT_SIZE_GAME_OVER}" if self.ui_font_family else None
             self.canvas.create_text(
                 self.width // 2,
                 self.height // 2,
