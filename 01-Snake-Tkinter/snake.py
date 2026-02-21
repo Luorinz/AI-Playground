@@ -174,18 +174,17 @@ class SnakeGame:
             self.mode_button_frame.destroy()
             self.mode_button_frame = None
 
-    def _get_canvas_font(self, size: int) -> Optional[str]:
-        """获取 Canvas 使用的字体字符串。
+    def _get_canvas_font(self, size: int) -> Optional[tkfont.Font]:
+        """获取 Canvas 使用的字体对象。
 
         Args:
             size: 字体大小
 
         Returns:
-            字体字符串或 None
+            Font 对象或 None
         """
         if self.ui_font_family:
-            # 字体名称有空格时需要引号
-            return f'"{self.ui_font_family}" {size}'
+            return tkfont.Font(family=self.ui_font_family, size=size)
         return None
 
     def show_mode_selection(self) -> None:
