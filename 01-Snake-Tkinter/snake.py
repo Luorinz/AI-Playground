@@ -106,6 +106,11 @@ class SnakeGame:
             "WenQuanYi Zen Hei Mono",
             "WenQuanYi Micro Hei",
             "Yu Gothic UI",
+            "Noto Sans CJK SC",
+            "Noto Sans SC",
+            "Source Han Sans SC",
+            "Sarasa Gothic SC",  # 更纱黑体
+            "LxgwWenKai",  # 霞鹜文楷
         ]
         for fam in candidate_families:
             try:
@@ -115,7 +120,18 @@ class SnakeGame:
                 return
             except tk.TclError:
                 continue
-        print("未检测到中文字体家族，使用 Tk 默认字体")
+
+        # 尝试使用系统默认字体
+        try:
+            default_font = tkfont.nametofont("TkDefaultFont")
+            if default_font:
+                self.ui_font_family = default_font.actual("family")
+                print("使用系统默认字体:", self.ui_font_family)
+                return
+        except Exception:
+            pass
+
+        print("未检测到中文字体家族，使用 Tk 默认字体（中文可能显示异常）")
 
     def _create_score_label(self) -> None:
         """创建分数标签。"""
