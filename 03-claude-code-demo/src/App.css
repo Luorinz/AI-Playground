@@ -173,3 +173,32 @@
   color: var(--text);
   border: 1px solid var(--accent);
 }
+
+/* 难度选择器 */
+.difficulty-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.difficulty-btn {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--panel-bg);
+  border: 1px solid var(--grid-line);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, transform 0.1s;
+}
+
+.difficulty-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+
+.difficulty-btn.active {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+}

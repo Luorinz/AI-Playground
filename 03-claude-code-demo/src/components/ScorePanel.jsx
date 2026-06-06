@@ -1,7 +1,7 @@
 import NextPiece from './NextPiece.jsx'
 
-// 侧边信息面板：分数、行数、等级、下一个方块、控制说明
-export default function ScorePanel({ score, lines, level, next, status }) {
+// 侧边信息面板：分数、行数、等级、难度、下一个方块、控制说明
+export default function ScorePanel({ score, lines, level, next, status, difficulty }) {
   return (
     <div className="score-panel">
       <div className="stat">
@@ -16,6 +16,12 @@ export default function ScorePanel({ score, lines, level, next, status }) {
         <span className="stat-label">等级</span>
         <span className="stat-value" data-testid="level">{level}</span>
       </div>
+      {difficulty && (
+        <div className="stat">
+          <span className="stat-label">难度</span>
+          <span className="stat-value" data-testid="difficulty">{difficulty}</span>
+        </div>
+      )}
 
       <div className="next-section">
         <span className="stat-label">下一个</span>
