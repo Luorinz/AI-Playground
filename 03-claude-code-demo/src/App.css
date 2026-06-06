@@ -26,6 +26,15 @@
   position: relative;
 }
 
+/* 粒子特效层：覆盖在面板之上，不拦截鼠标事件 */
+.particle-canvas {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  pointer-events: none;
+  z-index: 5;
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(var(--board-width), var(--cell-size));

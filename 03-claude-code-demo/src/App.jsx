@@ -1,15 +1,17 @@
-import { useState } from 'react'
-import { useTetris } from './game/useTetris.js'
-import Board from './components/Board.jsx'
-import ScorePanel from './components/ScorePanel.jsx'
-import DifficultySelector from './components/DifficultySelector.jsx'
-import { DEFAULT_DIFFICULTY, DIFFICULTIES } from './game/gameLogic.js'
-import './App.css'
+import { useState } from "react";
+import { useTetris } from "./game/useTetris.js";
+import Board from "./components/Board.jsx";
+import ScorePanel from "./components/ScorePanel.jsx";
+import DifficultySelector from "./components/DifficultySelector.jsx";
+import ParticleCanvas from "./components/ParticleCanvas.jsx";
+import { DEFAULT_DIFFICULTY, DIFFICULTIES } from "./game/gameLogic.js";
+import "./App.css";
 
 export default function App() {
-  const { state, actions } = useTetris()
-  const { board, current, next, score, lines, level, status } = state
-  const [difficulty, setDifficulty] = useState(DEFAULT_DIFFICULTY)
+  const { state, actions } = useTetris();
+  const { board, current, next, score, lines, level, status, clearEvent } =
+    state;
+  const [difficulty, setDifficulty] = useState(DEFAULT_DIFFICULTY);
 
   return (
     <div className="app">
@@ -18,8 +20,9 @@ export default function App() {
       <div className="game-area">
         <div className="board-wrapper">
           <Board board={board} piece={current} />
+          <ParticleCanvas clearEvent={clearEvent} />
 
-          {status === 'idle' && (
+          {status === "idle" && (
             <div className="overlay" data-testid="overlay-idle">
               <p>选择难度</p>
               <DifficultySelector value={difficulty} onChange={setDifficulty} />
@@ -29,7 +32,7 @@ export default function App() {
             </div>
           )}
 
-          {status === 'gameover' && (
+          {status === "gameover" && (
             <div className="overlay" data-testid="overlay-gameover">
               <p>游戏结束</p>
               <p className="final-score">最终得分：{score}</p>
@@ -51,11 +54,11 @@ export default function App() {
         />
       </div>
 
-      {status === 'playing' && (
+      {status === "playing" && (
         <button onClick={actions.togglePause} className="btn btn-secondary">
           暂停 / 继续
         </button>
       )}
     </div>
-  )
+  );
 }

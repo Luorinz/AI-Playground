@@ -14,6 +14,7 @@
 - 完整旋转系统，含简单踢墙（wall kick）
 - 三档难度选择（简单 / 中等 / 困难），控制方块下落速度
 - 软降、硬降、消行、计分、等级与加速
+- 消行时的 Canvas 粒子爆裂特效（颜色取自被消除的方块）
 - 下一个方块预览
 - 暂停 / 继续、游戏结束重开
 - 键盘操控
@@ -97,10 +98,12 @@ npm run test:coverage
     │   ├── Board.jsx              # 游戏面板
     │   ├── NextPiece.jsx          # 下一个方块预览
     │   ├── DifficultySelector.jsx # 难度选择器
+    │   ├── ParticleCanvas.jsx     # 消行粒子特效层
     │   └── ScorePanel.jsx         # 分数信息面板
     ├── game/
     │   ├── tetrominoes.js  # 方块定义
     │   ├── gameLogic.js    # 核心逻辑（纯函数）
+    │   ├── particles.js    # 粒子特效引擎（纯函数）
     │   └── useTetris.js    # 游戏状态 Hook
     └── __tests__/          # 测试文件
 ```
