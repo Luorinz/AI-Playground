@@ -16,6 +16,7 @@ describe("useTetris Hook", () => {
     expect(result.current.state.status).toBe("idle");
     expect(result.current.state.score).toBe(0);
     expect(result.current.state.current).toBeNull();
+    expect(result.current.state.clearEvent).toBeNull();
   });
 
   it("START 后进入 playing 并生成方块", () => {

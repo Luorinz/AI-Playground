@@ -128,6 +128,33 @@ describe("clearLines", () => {
     const { linesCleared } = clearLines(board);
     expect(linesCleared).toBe(2);
   });
+
+  it("返回被消除行的行号", () => {
+    const board = createEmptyBoard();
+    board[BOARD_HEIGHT - 1] = Array.from({ length: BOARD_WIDTH }, () => "#fff");
+    const { clearedRows } = clearLines(board);
+    expect(clearedRows).toEqual([BOARD_HEIGHT - 1]);
+  });
+
+  it("返回被消除格子的坐标与颜色（供粒子特效）", () => {
+    const board = createEmptyBoard();
+    board[BOARD_HEIGHT - 1] = Array.from({ length: BOARD_WIDTH }, () => "#abc");
+    const { clearedCells } = clearLines(board);
+    expect(clearedCells).toHaveLength(BOARD_WIDTH);
+    expect(clearedCells[0]).toEqual({
+      x: 0,
+      y: BOARD_HEIGHT - 1,
+      color: "#abc",
+    });
+    expect(clearedCells.every((c) => c.color === "#abc")).toBe(true);
+  });
+
+  it("未消除时 clearedCells 与 clearedRows 为空", () => {
+    const board = createEmptyBoard();
+    const { clearedCells, clearedRows } = clearLines(board);
+    expect(clearedCells).toEqual([]);
+    expect(clearedRows).toEqual([]);
+  });
 });
 
 describe("calculateScore", () => {

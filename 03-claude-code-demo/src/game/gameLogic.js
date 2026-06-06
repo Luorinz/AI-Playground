@@ -105,8 +105,22 @@ export function mergePiece(board, piece) {
   return newBoard;
 }
 
-// 清除已填满的行，返回 { board: 新面板, linesCleared: 消除的行数 }
+// 清除已填满的行，返回 { board, linesCleared, clearedRows, clearedCells }
+// clearedRows：被消除行的原始行号；clearedCells：被消除格子的 {x, y, color}，供粒子特效使用
 export function clearLines(board) {
+  const clearedRows = [];
+  const clearedCells = [];
+
+  board.forEach((row, y) => {
+    const isFull = row.every((cell) => cell !== null);
+    if (isFull) {
+      clearedRows.push(y);
+      row.forEach((color, x) => {
+        clearedCells.push({ x, y, color });
+      });
+    }
+  });
+
   const remainingRows = board.filter((row) =>
     row.some((cell) => cell === null),
   );
@@ -120,6 +134,8 @@ export function clearLines(board) {
   return {
     board: [...emptyRows, ...remainingRows],
     linesCleared,
+    clearedRows,
+    clearedCells,
   };
 }
 

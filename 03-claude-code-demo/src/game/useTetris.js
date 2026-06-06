@@ -23,17 +23,28 @@ const initialState = {
   lines: 0,
   level: 1,
   difficulty: DEFAULT_DIFFICULTY,
+  clearEvent: null, // 最近一次消行事件 { id, cells }，供粒子特效消费
   status: "idle", // idle | playing | paused | gameover
 };
 
 // 锁定当前方块到面板，消行计分，并生成下一个方块
 function lockAndSpawn(state) {
   const merged = mergePiece(state.board, state.current);
-  const { board: clearedBoard, linesCleared } = clearLines(merged);
+  const {
+    board: clearedBoard,
+    linesCleared,
+    clearedCells,
+  } = clearLines(merged);
 
   const totalLines = state.lines + linesCleared;
   const level = calculateLevel(totalLines);
   const score = state.score + calculateScore(linesCleared, state.level);
+
+  // 有消行时生成一个新的消行事件（id 递增确保 UI 每次都能感知）
+  const clearEvent =
+    linesCleared > 0
+      ? { id: (state.clearEvent?.id ?? 0) + 1, cells: clearedCells }
+      : state.clearEvent;
 
   const newPiece = createPiece(state.next);
   const nextType = randomTetrominoType();
@@ -47,6 +58,7 @@ function lockAndSpawn(state) {
       score,
       lines: totalLines,
       level,
+      clearEvent,
       status: "gameover",
     };
   }
@@ -59,6 +71,7 @@ function lockAndSpawn(state) {
     score,
     lines: totalLines,
     level,
+    clearEvent,
   };
 }
 
