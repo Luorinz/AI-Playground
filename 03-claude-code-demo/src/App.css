@@ -1,0 +1,175 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #00f0f0, #a000f0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.game-area {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.board-wrapper {
+  position: relative;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(var(--board-width), var(--cell-size));
+  grid-template-rows: repeat(var(--board-height), var(--cell-size));
+  gap: 1px;
+  background: var(--grid-line);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  padding: 1px;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background: var(--panel-bg);
+  border-radius: 2px;
+}
+
+.cell.filled {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+/* 覆盖层：开始/结束提示 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(15, 15, 26, 0.9);
+  border-radius: 4px;
+  font-size: 1.3rem;
+  z-index: 10;
+}
+
+.final-score {
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+/* 侧边面板 */
+.score-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 160px;
+  background: var(--panel-bg);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--grid-line);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #8888aa;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.next-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.next-preview {
+  display: grid;
+  gap: 2px;
+  width: fit-content;
+  min-height: 60px;
+}
+
+.mini-cell {
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  border-radius: 2px;
+}
+
+.mini-cell.filled {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.controls-help {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #8888aa;
+}
+
+.help-title {
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.controls-help ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.status-badge {
+  text-align: center;
+  padding: 8px;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* 按钮 */
+.btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 240, 240, 0.4);
+}
+
+.btn-secondary {
+  background: var(--panel-bg);
+  color: var(--text);
+  border: 1px solid var(--accent);
+}

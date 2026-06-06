@@ -1,0 +1,30 @@
+:root {
+  --board-width: 10;
+  --board-height: 20;
+  --cell-size: 28px;
+  --bg: #0f0f1a;
+  --panel-bg: #1a1a2e;
+  --grid-line: #2a2a40;
+  --text: #e0e0f0;
+  --accent: #00f0f0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root {
+  width: 100%;
+}
