@@ -80,6 +80,34 @@ describe("useTetris Hook", () => {
     expect(result.current.state.current.y).toBe(startY + 1);
   });
 
+  it("START 默认难度为简单", () => {
+    const { result } = renderHook(() => useTetris());
+    act(() => result.current.actions.start());
+    expect(result.current.state.difficulty).toBe("easy");
+  });
+
+  it("START 可指定困难难度", () => {
+    const { result } = renderHook(() => useTetris());
+    act(() => result.current.actions.start("hard"));
+    expect(result.current.state.difficulty).toBe("hard");
+  });
+
+  it("困难难度下方块下落更快（同一时间内下落更多格）", () => {
+    const easy = renderHook(() => useTetris());
+    act(() => easy.result.current.actions.start("easy"));
+    const easyStartY = easy.result.current.state.current.y;
+    act(() => vi.advanceTimersByTime(1000));
+    const easyDrop = easy.result.current.state.current.y - easyStartY;
+
+    const hard = renderHook(() => useTetris());
+    act(() => hard.result.current.actions.start("hard"));
+    const hardStartY = hard.result.current.state.current.y;
+    act(() => vi.advanceTimersByTime(1000));
+    const hardDrop = hard.result.current.state.current.y - hardStartY;
+
+    expect(hardDrop).toBeGreaterThan(easyDrop);
+  });
+
   // 键盘事件辅助：派发 keydown 到 window
   function pressKey(key) {
     act(() => {
