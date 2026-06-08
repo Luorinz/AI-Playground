@@ -1,0 +1,35 @@
+{
+  "name": "flappy-bird-codex-demo",
+  "version": "1.0.0",
+  "description": "A playable Flappy Bird style web game built with Vite and React.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "flappy-bird",
+    "react",
+    "vite",
+    "game"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/coverage-v8": "^2.0.5",
+    "jsdom": "^24.1.1",
+    "vite": "^5.4.2",
+    "vitest": "^2.0.5"
+  }
+}
