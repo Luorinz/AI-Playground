@@ -74,6 +74,35 @@ describe('game engine', () => {
     ).toBe(true);
   });
 
+  it('ends the game and stores the best score after a crash', () => {
+    const game = {
+      ...flap(createInitialGame()),
+      score: 3,
+      bestScore: 1,
+      birdY: 250,
+      pipes: [
+        {
+          id: 1,
+          x: BIRD_X,
+          gapTop: 300,
+          gapBottom: 430,
+          scored: false,
+        },
+      ],
+    };
+
+    const next = tickGame(game, 0.01);
+
+    expect(next.phase).toBe('gameOver');
+    expect(next.bestScore).toBe(3);
+  });
+
+  it('ignores flap while game over', () => {
+    const game = { ...createInitialGame(), phase: 'gameOver' };
+
+    expect(flap(game)).toBe(game);
+  });
+
   it('restarts with the best score preserved', () => {
     const restarted = restartGame({
       ...createInitialGame({ seed: 12 }),
